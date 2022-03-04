@@ -4,6 +4,10 @@
     <ProjectReference Include="..\ConsoleVending.Protocol\ConsoleVending.Protocol.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Terminal.Gui" Version="1.4.0" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
