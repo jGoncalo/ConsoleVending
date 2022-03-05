@@ -67,7 +67,11 @@ namespace ConsoleVending.Protocol.Vending
                     changeTransaction = _currencyHolder.TransactionFor(change);
                     if (changeTransaction == null) throw new VendingException("Change not available");
                 }
-                    
+                
+                //Take money
+                _currencyHolder.AddCurrency(_currentTransaction);
+                _currentTransaction.Reset();
+
                 //Item dispensing
                 var item = _itemsHolder.Take(SelectedItem.Value.Code);
                 return new VendingTransaction(item, changeTransaction);
@@ -80,11 +84,10 @@ namespace ConsoleVending.Protocol.Vending
             }
         }
 
-        public Item[] AvailableItems(bool includeSoldOut = false)
+        public ItemAmount[] AvailableItems(bool includeSoldOut = false)
         {
             return _itemsHolder.Items
                 .Where(ia => includeSoldOut || ia.Amount > 0)
-                .Select(ia => ia.Item)
                 .ToArray();
         }
 
@@ -112,7 +115,6 @@ namespace ConsoleVending.Protocol.Vending
 
         public IReadOnlyTransaction CurrentMoney()
         {
-            if (!InMaintenance) throw new InOperationException();
             var current = _currencyHolder.Currency;
             var transaction = new Transaction();
 

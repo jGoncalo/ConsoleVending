@@ -23,7 +23,14 @@ namespace ConsoleVending.Protocol.Items
         {
             return !left.Equals(right);
         }
-        
+
+        public string CostString => $"{(Cost / 100.0f):N2}£";
+
+        public override string ToString()
+        {
+            return $"[{Code}] - {Name} : {CostString}";
+        }
+
         public override bool Equals(object? obj)
         {
             if (obj is Item itm)

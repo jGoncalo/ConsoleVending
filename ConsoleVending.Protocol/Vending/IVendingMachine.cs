@@ -18,7 +18,7 @@ namespace ConsoleVending.Protocol.Vending
         VendingTransaction? PushMoney(Denomination denomination, int amount);
         
         
-        Item[] AvailableItems(bool includeSoldOut = false);
+        ItemAmount[] AvailableItems(bool includeSoldOut = false);
         uint ItemCost(uint itemCode);
         bool IsItemAvailable(uint itemCode);
 

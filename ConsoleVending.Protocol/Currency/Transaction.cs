@@ -35,5 +35,6 @@ namespace ConsoleVending.Protocol.Currency
         public int AmountOf(Denomination denomination) => _monetaryValues[denomination];
 
         public int TotalValue => _monetaryValues.Sum((kv) => kv.Value * (int) kv.Key);
+        public string TotalValueString => $"{TotalValue/100.0f:N2}£";
     }
 }

@@ -7,6 +7,7 @@ namespace ConsoleVending.Protocol.Currency
     public interface IReadOnlyTransaction
     {
         int TotalValue { get; }
+        string TotalValueString { get; }
         int AmountOf(Denomination denomination);
     }
 

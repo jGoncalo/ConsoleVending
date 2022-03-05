@@ -24,6 +24,11 @@ namespace ConsoleVending.Protocol.Items
             return new ItemAmount(left.Item, Math.Clamp(left.Amount - amount, 0, int.MaxValue));
         }
 
+        public override string ToString()
+        {
+            return $"{Item.ToString()}    {Amount} available";
+        }
+
         public override bool Equals(object? obj)
         {
             if (obj is ItemAmount itm)
