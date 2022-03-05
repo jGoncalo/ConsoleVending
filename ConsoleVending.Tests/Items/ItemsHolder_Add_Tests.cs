@@ -14,7 +14,7 @@ public class ItemsHolder_Add_Tests {
 
         #region Execute
         var insertedProduct = new Item("New Product", 1, 100);
-        holder.Add(insertedProduct, 0);
+        holder.Upsert(insertedProduct, 0);
         #endregion
 
         #region Validate
@@ -31,7 +31,7 @@ public class ItemsHolder_Add_Tests {
 
         #region Execute
         var insertedProduct = new Item("New Product", 1, 100);
-        holder.Add(insertedProduct, 12);
+        holder.Upsert(insertedProduct, 12);
         #endregion
 
         #region Validate
@@ -54,7 +54,7 @@ public class ItemsHolder_Add_Tests {
         #endregion
 
         #region Execute
-        holder.Add(existingProduct, 0);
+        holder.Upsert(existingProduct, 0);
         #endregion
 
         #region Validate
@@ -77,7 +77,7 @@ public class ItemsHolder_Add_Tests {
         #endregion
 
         #region Execute
-        holder.Add(existingProduct, 3);
+        holder.Upsert(existingProduct, 3);
         #endregion
 
         #region Validate

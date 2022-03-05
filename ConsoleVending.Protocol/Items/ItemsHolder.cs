@@ -32,6 +32,13 @@ namespace ConsoleVending.Protocol.Items
             return target.Item.Cost;
         }
 
+        public Item Inspect(uint itemCode)
+        {
+            var contains = _repo.TryGet(itemCode, out var target);
+            if (!contains) throw new ItemOperationException($"no item with code: {itemCode}");
+            return target.Item;
+        }
+
         public Item Take(uint itemCode)
         {
             var contains = _repo.TryGet(itemCode, out var target);
@@ -45,15 +52,13 @@ namespace ConsoleVending.Protocol.Items
             return target.Item;
         }
 
-        public void Add(Item item, uint amount)
+        public void Upsert(Item item, uint amount)
         {
             if (amount == 0) return;
             var contains = _repo.TryGet(item.Code, out var target);
-            if (contains) Replenish(item.Code, amount);
-            else
-            {
-                _repo[item.Code] = new ItemAmount(item, (int)amount);
-            }
+
+            var deltaAmount = contains ? target.Amount : 0;
+            _repo[item.Code] = new ItemAmount(item, (int)(amount + deltaAmount));
         }
 
         public void Replenish(uint itemCode, uint amount)

@@ -1,3 +1,4 @@
+using System;
 using ConsoleVending.Protocol.Enums;
 
 namespace ConsoleVending.Protocol.Currency
