@@ -94,7 +94,7 @@ namespace ConsoleVending.Tests.Currency {
         }
 
         [Fact]
-        public void ImpossibleChange(){
+         public void ImpossibleChange_CrucialDenomination(){
             #region Setup
             var currencyMap = new Dictionary<Denomination, int>{
                 { Denomination.OnePenny, 0 },
@@ -117,5 +117,29 @@ namespace ConsoleVending.Tests.Currency {
             Assert.Null(transaction);
             #endregion
         }
+         [Fact]
+         public void ImpossibleChange_NotEnoughDenomination(){
+             #region Setup
+             var currencyMap = new Dictionary<Denomination, int>{
+                 { Denomination.OnePenny, 1 },
+                 { Denomination.TwoPenny, 0 },
+                 { Denomination.FivePenny, 0 },
+                 { Denomination.TenPenny, 100 },
+                 { Denomination.TwentyPenny, 100 },
+                 { Denomination.FiftyPenny, 100 },
+                 { Denomination.OnePound, 100 },
+                 { Denomination.TwoPound, 100 }
+             };
+             var holder = new CurrencyHolder(ref currencyMap);
+             #endregion
+
+             #region Execute
+             var transaction = holder.TransactionFor(152u);
+             #endregion
+
+             #region Validate
+             Assert.Null(transaction);
+             #endregion
+         }
     }
 }

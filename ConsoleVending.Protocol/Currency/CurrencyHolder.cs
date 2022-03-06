@@ -74,7 +74,36 @@ namespace ConsoleVending.Protocol.Currency
         
         public IReadOnlyTransaction? TransactionFor(uint cost)
         {
-            return null;
+            //check if change is possible
+            if (TotalValue < cost) return null;
+            
+            var remainder = (int) cost;
+            var transaction = new Transaction();
+
+            var current = new Dictionary<Denomination, int>(Currency.Where(kv => kv.Value > 0));
+
+            while(remainder > 0){
+                var distances = current.Where(kv => kv.Value > 0)
+                    .Select(kv => new { 
+                        denomination = kv.Key, 
+                        distance = remainder - (int) kv.Key 
+                    })
+                    .Where(distance => distance.distance >= 0)
+                    .ToArray();
+                if (distances.Length == 0) break;
+                var best = distances.Aggregate((minCandidate, distance) => 
+                    distance.distance < minCandidate.distance ? distance : minCandidate);
+
+                remainder -= (int) best.denomination;
+                transaction.Push(best.denomination, 1);
+                current[best.denomination] -= 1;
+            }
+
+            //if remainder is not zero, transaction is impossible
+            if (remainder != 0) return null;
+            //if reminader is zero, transaction has the expected value
+            return transaction;
+
         }
     }
 }
