@@ -12,18 +12,18 @@ namespace ConsoleVending.App
         private Label? selectedCost;
         private Label? totalInserted;
 
-        private Button cancelBtn;
+        private Button? cancelBtn;
         
-        private Button insert1Btn;
-        private Button insert2Btn;
-        private Button insert5Btn;
-        private Button insert10Btn;
-        private Button insert20Btn;
-        private Button insert50Btn;
-        private Button insert100Btn;
-        private Button insert200Btn;
+        private Button? insert1Btn;
+        private Button? insert2Btn;
+        private Button? insert5Btn;
+        private Button? insert10Btn;
+        private Button? insert20Btn;
+        private Button? insert50Btn;
+        private Button? insert100Btn;
+        private Button? insert200Btn;
 
-        public event EventHandler<Denomination> OnPushed;
+        public event EventHandler<Denomination>? OnPushed;
         public event EventHandler? OnCancel;
             
         private Item? _selectedItem;
@@ -82,27 +82,27 @@ namespace ConsoleVending.App
                     X = 0, Y = 3,
                     Width = Dim.Fill(), Height = 1
                 },
-                insert1Btn = new Button("1¢") {
+                insert1Btn = new Button("1p") {
                     X = 0, Y = 4,
                     Width = Dim.Percent(50, true), Height = 1 
                 },
-                insert2Btn = new Button("2¢") {
+                insert2Btn = new Button("2p") {
                     X = Pos.Percent(50), Y = 4,
                     Width = Dim.Percent(50, true), Height = 1
                 },
-                insert5Btn = new Button("5¢") {
+                insert5Btn = new Button("5p") {
                     X = 0, Y = 5,
                     Width = Dim.Percent(50, true), Height = 1 
                 },
-                insert10Btn = new Button("10¢") {
+                insert10Btn = new Button("10p") {
                     X = Pos.Percent(50), Y = 5,
                     Width = Dim.Percent(50, true), Height = 1
                 },
-                insert20Btn = new Button("20¢") {
+                insert20Btn = new Button("20p") {
                     X = 0, Y = 6,
                     Width = Dim.Percent(50, true), Height = 1 
                 },
-                insert50Btn = new Button("50¢") {
+                insert50Btn = new Button("50p") {
                     X = Pos.Percent(50), Y = 6,
                     Width = Dim.Percent(50, true), Height = 1
                 },

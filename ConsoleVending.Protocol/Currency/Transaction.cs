@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Collections.Generic;
 using ConsoleVending.Protocol.Enums;
 
 namespace ConsoleVending.Protocol.Currency
@@ -36,5 +34,13 @@ namespace ConsoleVending.Protocol.Currency
 
         public int TotalValue => _monetaryValues.Sum((kv) => kv.Value * (int) kv.Key);
         public string TotalValueString => $"{TotalValue/100.0f:N2}£";
+
+        public override string ToString()
+        {
+            var amounts = String.Join("\n", _monetaryValues
+                .Where(kv => kv.Value > 0)
+                .Select(kv => $"{kv.Key.ToHuman()} - {kv.Value}"));
+            return $"Total: {TotalValueString}\n{amounts}";
+        }
     }
 }

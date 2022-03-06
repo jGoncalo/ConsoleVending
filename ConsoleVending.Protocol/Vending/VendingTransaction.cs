@@ -14,5 +14,14 @@ namespace ConsoleVending.Protocol.Vending
             Item = item;
             Transaction = transaction;
         }
+
+        public override string ToString()
+        {
+            return string.Join("\n", 
+                (Item == null ? string.Empty : Item.ToString()),
+                "Change:",
+                Transaction?.ToString() ?? string.Empty);
+
+        }
     }
 }

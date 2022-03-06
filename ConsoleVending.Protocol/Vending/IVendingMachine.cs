@@ -13,8 +13,8 @@ namespace ConsoleVending.Protocol.Vending
         Item? SelectedItem { get; }
         IReadOnlyTransaction CurrentTransaction { get; }
 
-        IReadOnlyTransaction CancelSelection();
-        void SelectItem(uint itemCode);
+        IReadOnlyTransaction? CancelSelection();
+        IReadOnlyTransaction? SelectItem(uint itemCode);
         VendingTransaction? PushMoney(Denomination denomination, int amount);
         
         

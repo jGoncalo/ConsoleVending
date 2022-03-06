@@ -26,8 +26,10 @@ namespace ConsoleVending.Protocol.Vending
         private readonly Transaction _currentTransaction = new (); 
         public IReadOnlyTransaction CurrentTransaction => _currentTransaction;
 
-        public IReadOnlyTransaction CancelSelection()
+        public IReadOnlyTransaction? CancelSelection()
         {
+            if(SelectedItem == null) return null;
+
             var returnedTransaction = new Transaction();
             if(_currentTransaction.TotalValue != 0) {
                 foreach (var denomination in Enum.GetValues<Denomination>())
@@ -40,10 +42,13 @@ namespace ConsoleVending.Protocol.Vending
             return returnedTransaction;
         }
 
-        public void SelectItem(uint itemCode)
+        public IReadOnlyTransaction? SelectItem(uint itemCode)
         {
             if (!IsItemAvailable(itemCode)) throw new VendingException("Item not available");
+            var transaction = SelectedItem == null ? null : CancelSelection();
             SelectedItem = _itemsHolder.Inspect(itemCode);
+
+            return transaction;
         }
 
         public VendingTransaction? PushMoney(Denomination denomination, int amount)
@@ -66,6 +71,9 @@ namespace ConsoleVending.Protocol.Vending
                 {
                     changeTransaction = _currencyHolder.TransactionFor(change);
                     if (changeTransaction == null) throw new VendingException("Change not available");
+
+                    //remove change
+                    _currencyHolder.RemoveCurrency(changeTransaction);
                 }
                 
                 //Take money

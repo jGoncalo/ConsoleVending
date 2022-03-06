@@ -30,7 +30,7 @@ namespace ConsoleVending.App
                 },
                 TotalValue = new Label()
                 {
-                    X = 0,  Y = Pos.Bottom(this), Height = 1, Width = Dim.Fill()
+                    X = 0,  Y = Pos.Bottom(DenominationCounter), Height = 1, Width = Dim.Fill()
                 });
             UpdateUi();
         }
@@ -40,12 +40,12 @@ namespace ConsoleVending.App
             var current = _vending.CurrentMoney();
             if (DenominationCounter != null)
             {
-                DenominationCounter.Text = $"1¢  -> {current.AmountOf(Denomination.OnePenny)}\n" +
-                                           $"2¢  -> {current.AmountOf(Denomination.TwoPenny)}\n" +
-                                           $"5¢  -> {current.AmountOf(Denomination.FivePenny)}\n" +
-                                           $"10¢ -> {current.AmountOf(Denomination.TenPenny)}\n" +
-                                           $"20¢ -> {current.AmountOf(Denomination.TwentyPenny)}\n" +
-                                           $"50¢ -> {current.AmountOf(Denomination.FiftyPenny)}\n" +
+                DenominationCounter.Text = $"1p  -> {current.AmountOf(Denomination.OnePenny)}\n" +
+                                           $"2p  -> {current.AmountOf(Denomination.TwoPenny)}\n" +
+                                           $"5p  -> {current.AmountOf(Denomination.FivePenny)}\n" +
+                                           $"10p -> {current.AmountOf(Denomination.TenPenny)}\n" +
+                                           $"20p -> {current.AmountOf(Denomination.TwentyPenny)}\n" +
+                                           $"50p -> {current.AmountOf(Denomination.FiftyPenny)}\n" +
                                            $"1£  -> {current.AmountOf(Denomination.OnePound)}\n" +
                                            $"2£  -> {current.AmountOf(Denomination.TwoPound)}\n";
             }
